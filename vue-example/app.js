@@ -44,7 +44,19 @@ var app = new Vue({
               this.clientY = e.clientY;
           }
       }
-
   })
+  var app3 = new Vue({
+      el:'#app3',
+      data:{
+          message:"hello"
+      },
+      methods:{
+        handSubmit(e){
+            console.log(e);
+            e.preventDefault();
+        }
+      }
+  })
+
 
 //click mousemove, mouseover, mouseleave
