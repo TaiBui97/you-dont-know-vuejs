@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="styles.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{ title }}</h1>
+        <p>{{ message }}</p>
+        <p>{{say('VUE')}}</p>
+    </div>
+    <div class="list-blog">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum dolorem beatae blanditiis tenetur velit
+            necessitatibus optio tempore veniam enim neque!</p>
+    </div>
+    <div id="app2">
+        <span v-bind:title="title">Lorem ipsum dolor sit amet.</span>
+        <a v-bind:href="link">Click me</a>
+        <p>{{message}}</p>
+        <ul>
+            <li v-for="work in todos"> {{work.text}} </li>
+        </ul>
+        <p>{{ check ? 'this is true' : 'this is false'}}</p>
+        <p> {{ 20 < 10 ? 'this is true' : 'this is false'}}</p>
+        <p> {{formatPrice()}}</p>
+        <p> this is couter {{counter}}</p>
+        <button v-on:click="handClick"> click me</button>
+        <button v-on:click="counter +=2">Click me to +2</button>
+        <button v-on:click="handClick($event,5)"> click me use event & number</button>
+        <div class="box" v-on:mousemove="handMouse">
+            <p>Client X : {{ clientX }}</p>
+            <p>Client Y : {{ clientY }}</p>
+            <div class="box2" v-on:mousemove.prevent="handMouseChild"></div>
+        </div>
+        <p>{{ message }}</p>
+        <input v-model="message">
+    </div>
+    <div id="app3">
+        <!-- event modifier -->
+        <form action="./server.php" v-on:submit.prevent="handSubmit">
+            <label for="">First Name</label>
+            <input type="text" name="firstName">
+            <label for="">Email</label>
+            <input type="text" name="emailUser">
+            <button type="submit">Submit</button>
+        </form>
+        <!-- computed -->
+        <button v-on:click="a++">A = A +1 </button>
+        <button v-on:click="b++">B = B +1 </button>
+        </hr>
+        <p> Number + A = {{ addA }}</p>
+        <p> Number + B = {{ addB }}</p>
+        <!-- v-model replace method binding two way by keyup -->
+        <label for="">My Name : {{ myName }}</label>
+        <input type="text" name="myName" v-on:keyup="handKeyUp">
+    </div>
+    <div id="app4">
+        <div v-bind:style="urlImg">         <!-- binding ojbStyle by computed -->
+            <!-- Class and style binding -->
+            <div class="demo" v-bind:class="objClass"></div>
+            <button v-on:click="changleActive">Change background active</button>
+            <button v-on:click="changleError">Change background errors</button>
+            <!-- binding inline styles -->
+            <div v-bind:style="{fontSize: fontSize + 'px', color: activeColor}">
+                 this is style inline
+            </div>
+        </div>
+
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>

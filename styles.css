@@ -1,0 +1,28 @@
+.box{
+    width: 300px;
+    height: 300px;
+    background-color: aqua;
+    position: relative;
+}
+.box2{
+    width: 100px;
+    height: 50px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color:blue;
+}
+.demo{
+    margin: 10px;
+    width: 300px;
+    height: 300px;
+    background-color:#333;
+}
+.active{
+    background-color: green;
+
+}
+.error{
+    background-color: red;
+    
+}
