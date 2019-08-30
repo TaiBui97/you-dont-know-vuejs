@@ -26,3 +26,50 @@
     background-color: red;
     
 }
+.tabs{
+    padding: 0;
+    margin: 0;
+}
+.tabs li{
+    display: inline-block;
+    padding: 10px;
+    border: 1px solid #333;
+    margin-top:10px;
+    cursor: pointer;
+}
+.fl-left, .fl-right{
+    width: 45%;
+    float: left;
+}
+.fl-left .image-product img{
+    display: inline-block;
+    width: 60%;
+    height: 200px;
+}
+.price{
+    margin: 15px
+}
+.price span{
+    padding :5px;
+    border: 1px solid #dddddd
+}
+.pub-price{
+    display: block;
+    margin: 10px;
+}
+.origin-price{
+    text-decoration: line-through
+}
+.img-color ul li {
+    display: inline-flex
+    
+}
+.img-color ul li img{
+    border:1px solid #ddd;
+    padding: 2px;
+    
+}
+.activeproduct{
+    border: 2px solid red;
+    opacity: 1;
+}
