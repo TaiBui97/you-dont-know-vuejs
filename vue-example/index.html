@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="styles.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-
 </head>
 
 <body>
@@ -37,17 +36,151 @@
         <div class="box" v-on:mousemove="handMouse">
             <p>Client X : {{ clientX }}</p>
             <p>Client Y : {{ clientY }}</p>
-
+            <div class="box2" v-on:mousemove.prevent="handMouseChild"></div>
         </div>
+        <p>{{ message }}</p>
+        <input v-model="message">
     </div>
     <div id="app3">
-        <form action="./server.php" v-on:submit="handSubmit">
+        <!-- event modifier -->
+        <form action="./server.php" v-on:submit.prevent="handSubmit">
             <label for="">First Name</label>
             <input type="text" name="firstName">
             <label for="">Email</label>
             <input type="text" name="emailUser">
             <button type="submit">Submit</button>
         </form>
+        <!-- computed -->
+        <button v-on:click="a++">A = A +1 </button>
+        <button v-on:click="b++">B = B +1 </button>
+        </hr>
+        <p> Number + A = {{ addA }}</p>
+        <p> Number + B = {{ addB }}</p>
+        <!-- v-model replace method binding two way by keyup -->
+        <label for="">My Name : {{ myName }}</label>
+        <input type="text" name="myName" v-on:keyup="handKeyUp">
+    </div>
+    <div id="app4">
+        <div v-bind:style="urlImg">
+            <!-- binding ojbStyle by computed -->
+            <!-- Class and style binding -->
+            <div class="demo" v-bind:class="objClass"></div>
+            <button v-on:click="changleActive">Change background active</button>
+            <button v-on:click="changleError">Change background errors</button>
+            <!-- binding inline styles -->
+            <div v-bind:style="{fontSize: fontSize + 'px', color: activeColor}">
+                this is style inline
+            </div>
+        </div>
+    </div>
+    <div id="app5">
+        <!-- Conditional Rendering -->
+        <!-- using v-if -> remove dom html
+                  v-show -> hidden dom html (keep element) by css  -->
+        <ul class="tabs">
+            <li @click="changleForm('login')">Login</li>
+            <li @click="changleForm('register')">Register</li>
+        </ul>
+        <div class="login" v-if="isActiveForm === 'login'">
+            <h2>Login</h2>
+            <form action="">
+                <label for="email">Email</label>
+                <input type="text">
+                <label for="pwd">Password</label>
+                <input type="text">
+            </form>
+        </div>
+        <div class="register" v-else-if="isActiveForm === 'register'">
+            <h2>Register</h2>
+            <form action="">
+                <input type="text" placeholder="email">
+                <input type="text" placeholder="pwd">
+            </form>
+        </div>
+        <!-- using v-key to dont keep data input when change loginType eg ----> -->
+
+        <!-- dont using v-key
+        <template v-if="loginType === 'username'">
+            <label>Username</label>
+            <input placeholder="Enter your username">
+        </template>
+        <template v-else>
+            <label>Email</label>
+            <input placeholder="Enter your email address">
+        </template> -->
+
+        <!-- using v-key : -->
+        <template v-if="loginType === 'username'">
+            <label>Username</label>
+            <input placeholder="Enter your username" key="username-input">
+        </template>
+        <template v-else>
+            <label>Email</label>
+            <input placeholder="Enter your email address" key="email-input">
+        </template>
+        <li v-for="emp in employees">{{emp.name}}</li>
+        <li v-for="(value, key) in scores">{{key}} : {{value}}</li>
+
+        <!-- note -> v:for v-if -->
+        <!-- shouldn't -->
+        <li v-for="user in arrUsers" v-if="user.isActive">{{user.email}}</li>
+        <!-- should -->
+        <li v-for="user in usersActive">{{user.email}}</li>
+
+    </div>
+    <!-- notice :
+    +   arr change detection
+    +   obj change detection 
+
+    => use $set(target data, new value or detect value, new value )
+-->
+    <div id="app6">
+
+        <div class="container">
+            <div class="fl-left">
+                <div class="image-product">
+                    <img v-bind:src="getProduct.image" alt="">
+                </div>
+            </div>
+            <div class="fl-right">
+                <div class="tiitle-product">
+                    {{title}}
+
+                </div>
+                <div class="price">
+                    <span class="pub-price">{{priceSaleOff}}</span>
+                    <span class="origin-price">{{formatPrice}}</span>
+                    <span class="sale-off">{{priceSale * 100}} %</span>
+                </div>
+                <div class="qty">
+                    <label for="quantily" v-if="getProduct.qty > 0">{{getProduct.qty}}</label>
+                    <label for="quantily" v-else="getProduct.qty <= 0">Het hang</label>
+
+                </div>
+                <div class="color">
+                    <span class="title-color">{{getProduct.textColor}}</span>
+                    <div class="img-color">
+                        <ul>
+                            <li v-for="(item,index) in listProductDetails" v-bind:class="classActive(index)"
+                                v-on:click="handClick($event, index)">
+                                <img v-bind:src="item.image" alt="">
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- note :  
+         + using v-html: to binding html src
+         + eg data {
+             abc ,
+             def ,
+             efg,
+         }
+            -> using v-for="item in data" -> {{data}} -->
     </div>
     <script src="app.js"></script>
 </body>
